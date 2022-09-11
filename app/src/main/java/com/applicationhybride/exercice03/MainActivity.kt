@@ -1,7 +1,9 @@
 package com.applicationhybride.exercice03
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,7 +41,8 @@ class MainActivity : AppCompatActivity() {
                 // get data from array of objects
                 val data: List<Artist> = Gson().fromJson(it, Array<Artist>::class.java).toList()
                 // set adapter
-                this.recyclerView.adapter = ArtistAdapter(data)
+                val nomArtistes = data.map { it.nom }
+                this.recyclerView.adapter = ArtistAdapter(nomArtistes)
                 Toast.makeText(this, "Réponse reçue", Toast.LENGTH_SHORT).show()
             }
         ) { error ->
