@@ -2,4 +2,5 @@
     <string name="app_name">exercice03</string>
     <string name="albums">Albums</string>
     <string name="image_of_the_album">Image of the album</string>
+    <string name="artistes">Artistes</string>
 </resources>
