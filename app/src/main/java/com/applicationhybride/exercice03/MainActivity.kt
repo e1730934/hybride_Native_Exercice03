@@ -3,7 +3,6 @@ package com.applicationhybride.exercice03
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -38,8 +37,8 @@ class MainActivity : AppCompatActivity() {
             Request.Method.GET,
             url,
             Response.Listener{
-                val d = Gson().fromJson(it, Array<Artist>::class.java).toList()
-                data.addAll(d)
+                val fetchedData = Gson().fromJson(it, Array<Artist>::class.java).toList()
+                data.addAll(fetchedData)
                 this.recyclerView.adapter?.notifyDataSetChanged()
             }
         ) { error ->
