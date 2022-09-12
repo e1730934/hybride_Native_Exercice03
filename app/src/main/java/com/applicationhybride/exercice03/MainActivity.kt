@@ -1,5 +1,6 @@
 package com.applicationhybride.exercice03
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -19,13 +20,16 @@ data class Artist(
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
+    private val data= mutableListOf<Artist>()
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         this.recyclerView = findViewById(R.id.rvArtistes)
         this.recyclerView.layoutManager = LinearLayoutManager(this)
+        this.recyclerView.adapter = ArtistAdapter(data)
 
         val queue = Volley.newRequestQueue(this@MainActivity)
         val url = "https://musicstoreapi.herokuapp.com/artistes"
@@ -34,8 +38,9 @@ class MainActivity : AppCompatActivity() {
             Request.Method.GET,
             url,
             Response.Listener{
-                val data: List<Artist> = Gson().fromJson(it, Array<Artist>::class.java).toList()
-                this.recyclerView.adapter = ArtistAdapter(data)
+                val d = Gson().fromJson(it, Array<Artist>::class.java).toList()
+                data.addAll(d)
+                this.recyclerView.adapter?.notifyDataSetChanged()
             }
         ) { error ->
             error.printStackTrace()

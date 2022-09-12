@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ArtistAdapter(private val listeArtistes: List<Artist>) :
+class ArtistAdapter(private val listeArtistes: MutableList<Artist>) :
     RecyclerView.Adapter<ArtistAdapter.RecyclerViewViewHolder>() {
 
     class RecyclerViewViewHolder(val view: View) : RecyclerView.ViewHolder(view)
